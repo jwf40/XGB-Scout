@@ -23,16 +23,19 @@ class YearlyDataLoader:
         self,
         year: str,
         gws: Union[None, List[str]],
-        data_root: Optional[str] = "data",
+        data_root: Optional[str] = "src/data",
+        teams_csv_path: Optional[str] = "src/master_team_list.csv",
         features: Optional[List[str]] = None,
     ) -> None:
         """
         ||year: str => year to get data from.
         ||gws: Union[None, List[str]] => gameweeks to get data from. Set to None to get all
         ||data_root: Optional[str] => root folder for csv data
+        ||teams_csv: Optional[str] => path to teams data csv file
         ||features: Optional[List[str]] => list of features to take from gameweek csvs. Leave blank to take all.
         """
         self.root = data_root
+        self.teams_csv_path = teams_csv_path
         self.year = year
         self.features = features
 
@@ -51,7 +54,7 @@ class YearlyDataLoader:
         """
         Gets the mapping from team codes to names, and vice versa
         """
-        team_df = pd.read_csv("master_team_list.csv", encoding="latin-1")
+        team_df = pd.read_csv(self.teams_csv_path, encoding="latin-1")
         team_df = team_df.loc[team_df["season"] == self.year]
         code2name = dict()
         name2code = dict()

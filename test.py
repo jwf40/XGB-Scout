@@ -1,5 +1,5 @@
 import pandas as pd
-from dataloader import YearlyDataLoader
+from src.dataloader import YearlyDataLoader
 
 YEAR_SET = {"2019-20", "2020-21", "2021-22", "2022-23", "2023-24"}
 
